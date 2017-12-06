@@ -5,9 +5,32 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <iterator>
 #include "Course.h"
 #include "CourseOffering.h"
 #include "Requirements.h"
+
+std::vector<std::vector<std::string> > read_schedule(std::string path){
+    std::vector<std::vector<std::string> > ret;
+    std::string line;
+
+    std::ifstream read(path);
+    
+    while(read.good()){
+        std::getline(read, line);
+        std::istringstream in(line);
+        std::vector<std::string> semester;
+        //split a string, taken from internet
+        std::copy(std::istream_iterator<std::string>(in),
+        std::istream_iterator<std::string>(),
+        std::back_inserter(semester));
+
+        ret.push_back(semester);
+    }
+
+    return ret;
+
+} 
 
 std::vector<CourseOffering> read_offerings(std::string path){
     std::vector<CourseOffering> ret;
