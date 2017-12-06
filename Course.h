@@ -2,6 +2,7 @@
 #define COURSE_H
 
 #include <string>
+#include <vector>
 
 class Course{
     public:

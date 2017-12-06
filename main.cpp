@@ -9,11 +9,6 @@
 #include "Requirements.h"
 
 
-int main(int argc, char *argv[]){
-    
-    return 0;
-}
-
 Requirements read_req(std::string path){
     Requirements ret;
     //values for storing input data in
@@ -57,4 +52,10 @@ Requirements read_req(std::string path){
 
         
     }
+    return ret;
+}
+
+int main(int argc, char *argv[]){
+    auto req = read_req("./samples/req.txt"); 
+    return 0;
 }
