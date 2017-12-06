@@ -95,11 +95,12 @@ Requirements read_req(std::string path){
         }
         else if(word == "CHOOSE"){
             in >> n;
-            auto p = std::make_pair(n, std::vector<std::string>());
+            Requirements::Choice choice;
+            choice.amount = n;
             while(in >> word){
-                p.second.push_back(word);
+                choice.classes.push_back(word);
             }
-            ret.choices.push_back(p);
+            ret.choices.push_back(choice);
         }
 
         
