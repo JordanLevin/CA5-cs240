@@ -7,7 +7,7 @@
 #include <sstream>
 #include <iterator>
 #include "Course.h"
-#include "CourseOffering.h"
+#include "CourseOfferings.h"
 #include "Requirements.h"
 
 std::vector<std::vector<std::string> > read_schedule(std::string path){
@@ -32,8 +32,8 @@ std::vector<std::vector<std::string> > read_schedule(std::string path){
 
 } 
 
-std::vector<CourseOffering> read_offerings(std::string path){
-    std::vector<CourseOffering> ret;
+CourseOfferings read_offerings(std::string path){
+    CourseOfferings ret;
     //values for storing input data in
     std::string line, word;
     int n;
@@ -41,7 +41,7 @@ std::vector<CourseOffering> read_offerings(std::string path){
 
     std::ifstream read(path);
     while(read.good()){
-        CourseOffering course;
+        CourseOfferings::Offering course;
 
         std::getline(read, line);
         std::istringstream in(line);
@@ -55,7 +55,7 @@ std::vector<CourseOffering> read_offerings(std::string path){
         in >> word;
         course.tags = word;
 
-        ret.push_back(course);
+        ret.offerings.push_back(course);
     }
 
     return ret;
