@@ -6,8 +6,37 @@
 #include <fstream>
 #include <sstream>
 #include "Course.h"
+#include "CourseOffering.h"
 #include "Requirements.h"
 
+std::vector<CourseOffering> read_offerings(std::string path){
+    std::vector<CourseOffering> ret;
+    //values for storing input data in
+    std::string line, word;
+    int n;
+    char c;
+
+    std::ifstream read(path);
+    while(read.good()){
+        CourseOffering course;
+
+        std::getline(read, line);
+        std::istringstream in(line);
+
+        in >> word;
+        course.name = word;
+        in >> n;
+        course.credits = n;
+        in >> c;
+        course.semester = c;
+        in >> word;
+        course.tags = word;
+
+        ret.push_back(course);
+    }
+
+    return ret;
+}
 
 Requirements read_req(std::string path){
     Requirements ret;
