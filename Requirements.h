@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include "Course.h"
+#include "CourseOfferings.h"
+#include "Schedule.h"
 
 class Requirements {
     public:
@@ -17,7 +19,7 @@ class Requirements {
         std::vector<Course> courses;
         std::vector<Choice> choices;
 
-        bool verify(CourseOffering offerings, 
-                std::vector<std::vector<std::string>> schedule);
+        bool verify(CourseOfferings offerings, 
+               Schedule sched);
 };
 #endif /* ifndef SYMBOL */

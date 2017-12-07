@@ -9,7 +9,9 @@
 #include "Course.h"
 #include "CourseOfferings.h"
 #include "Requirements.h"
+#include "Schedule.h"
 
+/*
 std::vector<std::vector<std::string> > read_schedule(std::string path){
     std::vector<std::vector<std::string> > ret;
     std::string line;
@@ -31,6 +33,30 @@ std::vector<std::vector<std::string> > read_schedule(std::string path){
     return ret;
 
 } 
+
+*/
+
+Schedule read_schedule(std::string path){
+  Schedule ret;
+  std::string line, word;
+  std::vector<std::string> courses;
+  std::string s;
+  std::string  c;
+
+  std::ifstream read(path);
+  while (read.good()){
+    std::getline(read, line);
+    std::istringstream in(line);
+    in >> s;
+    while (in >> c){
+      courses.push_back(c);
+    }
+    std::cout << "print" <<  s << std::endl;
+    ret.semesters.push_back(std::make_pair(s, courses));
+    courses.clear();
+  }
+  return ret;
+}
 
 CourseOfferings read_offerings(std::string path){
     CourseOfferings ret;
@@ -110,5 +136,19 @@ Requirements read_req(std::string path){
 
 int main(int argc, char *argv[]){
     auto req = read_req("./samples/req.txt"); 
+    auto off = read_offerings("./samples/courses.txt"); 
+    auto sched = read_schedule("./samples/schedule.txt");
+
+    std::cout << req.total << std::endl;
+    for (unsigned int i =0; i<req.courses.size(); i++){
+      std::cout << req.courses[i].name << std::endl;
+    }
+    for (unsigned int i =0; i<req.credits.size(); i++){
+      std::cout << req.credits[i].first << " " << req.credits[i].second << std::endl;
+    }
+    for (unsigned int i =0; i<sched.semesters.size()-1; i++){
+      std::cout << sched.semesters[i].first << " " << sched.semesters[i].second[2] << std::endl;
+    }
+    sched.sort_semesters();
     return 0;
 }

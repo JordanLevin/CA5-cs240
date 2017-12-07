@@ -4,11 +4,11 @@
 
 using namespace std;
 
-bool Requirements::verify(CourseOffering offerings, 
-        std::vector<std::vector<std::string>> schedule){
+bool Requirements::verify(CourseOfferings offerings, 
+        Schedule schedule){
         bool good_schedule = true;
         //Checking if each course is offered
-        for(int i = 0; i < schedule.size(); i++){
+        /*for(int i = 0; i < schedule.size(); i++){
             string name = schedule[i][0];
             bool course_offered = false;
             for(int i = 0; i < offerings.size(); i++){
@@ -23,5 +23,6 @@ bool Requirements::verify(CourseOffering offerings,
             }
           }
             //continue for other checks
-
+        */
+        return good_schedule;
 }
