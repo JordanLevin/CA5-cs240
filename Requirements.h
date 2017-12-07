@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include "Course.h"
 #include "CourseOfferings.h"
 #include "Schedule.h"
 
@@ -13,6 +12,15 @@ class Requirements {
             public:
             int amount;
             std::vector<std::string> classes;
+        };
+        class Course{
+            public:
+                std::string name;
+                char req;
+                std::vector<std::string> prereqs;
+
+                Course() = default;
+                ~Course() = default;
         };
         int total;
         std::vector<std::pair<char, int> > credits;
