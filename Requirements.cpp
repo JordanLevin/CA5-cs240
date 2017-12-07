@@ -18,9 +18,10 @@ bool Requirements::verify(CourseOffering offerings,
                     course_offered = true;
                 }
             }
-        if(!course_offered){
-          return;
-        }
-        //continue for other checks
+            if(!course_offered){
+               return;
+            }
+          }
+            //continue for other checks
 
 }
