@@ -6,7 +6,6 @@
 #include <fstream>
 #include <sstream>
 #include <iterator>
-#include "Course.h"
 #include "CourseOfferings.h"
 #include "Requirements.h"
 #include "Schedule.h"
@@ -111,7 +110,7 @@ Requirements read_req(std::string path){
         else if(word == "COURSE"){
             in >> word;
             in >> c;
-            Course course;
+            Requirements::Course course;
             course.name = word;
             course.req = c;
             while(in >> word){
