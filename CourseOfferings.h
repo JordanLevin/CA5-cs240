@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 class CourseOfferings{
     public:
@@ -15,6 +16,7 @@ class CourseOfferings{
         };
 
         std::vector<Offering> offerings;
+        std::unordered_map<std::string, std::string> look_up; 
 
         CourseOfferings() = default;
         ~CourseOfferings() = default;
