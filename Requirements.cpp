@@ -1,6 +1,7 @@
 #include "Requirements.h"
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -24,4 +25,15 @@ bool Requirements::verify(CourseOfferings offerings,
         return good_schedule;
 }
 
-void Requirements::make_graph();
+void Requirements::make_graph(){
+    for(auto& course: courses){
+        for(std::string& name: course.prereqs){
+            auto prereq = std::find_if(courses.begin(), courses.end(),
+                    [&](Course c){
+                    return c.name == name;
+                    });
+            if(prereq != courses.end())
+                course.prereq_ptr.push_back(&(*prereq));
+        }
+    }
+}

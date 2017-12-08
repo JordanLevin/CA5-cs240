@@ -19,7 +19,7 @@ class Requirements {
                 std::string name;
                 char req;
                 std::vector<std::string> prereqs;
-                std::vector<std::string> prereq_ptr;
+                std::vector<Course*> prereq_ptr;
 
                 Course() = default;
                 ~Course() = default;
