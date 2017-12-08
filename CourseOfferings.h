@@ -16,7 +16,7 @@ class CourseOfferings{
         };
 
         std::vector<Offering> offerings;
-        std::unordered_map<std::string, std::string> look_up; 
+        std::unordered_map<std::string, Offering> look_up; 
 
         CourseOfferings() = default;
         ~CourseOfferings() = default;

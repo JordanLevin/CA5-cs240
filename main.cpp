@@ -57,6 +57,7 @@ CourseOfferings read_offerings(std::string path){
         course.tags = word;
 
         ret.offerings.push_back(course);
+        ret.look_up[course.name] = course;
     }
 
     return ret;
@@ -81,7 +82,7 @@ Requirements read_req(std::string path){
         else if(word == "CREDIT"){
             in >> c;
             in >> n;
-            ret.credits.push_back(std::make_pair(c, n));
+            ret.credits[c] = n;
         }
         else if(word == "COURSE"){
             in >> word;

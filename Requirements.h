@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include "CourseOfferings.h"
 #include "Schedule.h"
 
@@ -25,13 +26,13 @@ class Requirements {
             ~Course() = default;
         };
         int total;
-        std::vector<std::pair<char, int> > credits;
+        std::unordered_map<char, int> credits;
         std::vector<Course> courses;
         std::vector<Choice> choices;
 
         void make_graph();
         bool take_class(std::string name);
-        std::string verify(const CourseOfferings& offerings, 
+        std::string verify(CourseOfferings& offerings, 
                const Schedule& sched);
 
 
