@@ -26,3 +26,5 @@ bool Requirements::verify(CourseOfferings offerings,
         */
         return good_schedule;
 }
+
+void Requirements::make_graph();
