@@ -6,23 +6,20 @@ using namespace std;
 
 bool Requirements::verify(CourseOfferings offerings, 
         Schedule schedule){
-        bool good_schedule = true;
+        bool good_schedule = false;
         //Checking if each course is offered
-        /*for(int i = 0; i < schedule.size(); i++){
-            string name = schedule[i][0];
-            bool course_offered = false;
-            for(int i = 0; i < offerings.size(); i++){
-                if(offerings[i].name == name){
-                    //implement the hash table and put it here so time
-                    //complexity is better instead of this for loop
-                    course_offered = true;
-                }
+        for(unsigned int i = 0; i < schedule.semesters.size(); i++){
+            for(unsigned int j = 0; j < schedule.semesters[i].second.size(); j++){
+              string name = schedule.semesters[i].second[j];
+              if (offerings.look_up.count(name)>0){
+                good_schedule = true;
+              } else{
+                return false;
+              }
             }
-            if(!course_offered){
-               return;
-            }
-          }
+        }
+          
             //continue for other checks
-        */
+        
         return good_schedule;
 }

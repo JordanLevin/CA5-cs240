@@ -29,5 +29,7 @@ class Requirements {
 
         bool verify(CourseOfferings offerings, 
                Schedule sched);
+
+
 };
 #endif /* ifndef SYMBOL */
