@@ -10,51 +10,27 @@
 #include "Requirements.h"
 #include "Schedule.h"
 
-/*
-std::vector<std::vector<std::string> > read_schedule(std::string path){
-    std::vector<std::vector<std::string> > ret;
-    std::string line;
+Schedule read_schedule(std::string path){
+    Schedule ret;
+    std::string line, word;
+    std::string s;
 
     std::ifstream read(path);
-    
-    while(read.good()){
+    while (read.good()){
+        Schedule::Semester s;
         std::getline(read, line);
         std::istringstream in(line);
-        std::vector<std::string> semester;
-        //split a string, taken from internet
-        std::copy(std::istream_iterator<std::string>(in),
-        std::istream_iterator<std::string>(),
-        std::back_inserter(semester));
-
-        ret.push_back(semester);
+        in >> word;
+        s.s = word[0];
+        s.year = word;
+        while (in >> word){
+            s.classes.push_back(word);
+        }
+        //std::cout << "print" <<  s << std::endl;
+        ret.semesters.push_back(s);
+        //courses.clear();
     }
-
     return ret;
-
-} 
-
-*/
-
-Schedule read_schedule(std::string path){
-  Schedule ret;
-  std::string line, word;
-  std::vector<std::string> courses;
-  std::string s;
-  std::string  c;
-
-  std::ifstream read(path);
-  while (read.good()){
-    std::getline(read, line);
-    std::istringstream in(line);
-    in >> s;
-    while (in >> c){
-      courses.push_back(c);
-    }
-    std::cout << "print" <<  s << std::endl;
-    ret.semesters.push_back(std::make_pair(s, courses));
-    courses.clear();
-  }
-  return ret;
 }
 
 CourseOfferings read_offerings(std::string path){
@@ -128,7 +104,7 @@ Requirements read_req(std::string path){
             ret.choices.push_back(choice);
         }
 
-        
+
     }
     return ret;
 }
@@ -138,16 +114,16 @@ int main(int argc, char *argv[]){
     auto off = read_offerings("./samples/courses.txt"); 
     auto sched = read_schedule("./samples/schedule.txt");
 
-    std::cout << req.total << std::endl;
-    for (unsigned int i =0; i<req.courses.size(); i++){
-      std::cout << req.courses[i].name << std::endl;
-    }
-    for (unsigned int i =0; i<req.credits.size(); i++){
-      std::cout << req.credits[i].first << " " << req.credits[i].second << std::endl;
-    }
-    for (unsigned int i =0; i<sched.semesters.size()-1; i++){
-      std::cout << sched.semesters[i].first << " " << sched.semesters[i].second[2] << std::endl;
-    }
-    sched.sort_semesters();
+    std::cout << req.verify(off, sched) << std::endl;
+    //for (unsigned int i =0; i<req.courses.size(); i++){
+        //std::cout << req.courses[i].name << std::endl;
+    //}
+    //for (unsigned int i =0; i<req.credits.size(); i++){
+        //std::cout << req.credits[i].first << " " << req.credits[i].second << std::endl;
+    //}
+    //for (unsigned int i =0; i<sched.semesters.size()-1; i++){
+        //std::cout << sched.semesters[i].year << std::endl;
+    //}
+    //sched.sort_semesters();
     return 0;
 }

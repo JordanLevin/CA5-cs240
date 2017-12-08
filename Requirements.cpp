@@ -5,24 +5,51 @@
 
 using namespace std;
 
-bool Requirements::verify(CourseOfferings offerings, 
-        Schedule schedule){
+std::string Requirements::verify(const CourseOfferings& offerings,
+        const Schedule& schedule){
         bool good_schedule = false;
         //Checking if each course is offered
-        for(unsigned int i = 0; i < schedule.semesters.size(); i++){
-            for(unsigned int j = 0; j < schedule.semesters[i].second.size(); j++){
-              string name = schedule.semesters[i].second[j];
-              if (offerings.look_up.count(name)>0){
-                good_schedule = true;
-              } else{
-                return false;
-              }
+        for(size_t i = 0; i < schedule.semesters.size(); i++){
+            for(size_t j = 0; j < schedule.semesters[i].classes.size(); j++){
+                std::string name = schedule.semesters[i].classes[j];
+                if (offerings.look_up.count(name)>0){
+                    good_schedule = true;
+                } else{
+                    //return std::string("Course not found: ") + name;
+                }
             }
         }
-          
-            //continue for other checks
+        //check that the course schedule works with prereqs
         
-        return good_schedule;
+        for(auto sem: schedule.semesters){
+            for(auto course: sem.classes){
+                if(!take_class(course))
+                    return std::string("Prereqs not met: ") + course;
+            }
+        }
+        
+        //If we find a reason for the schedule to fail we return false earlier
+        //if program reaches here its valid
+        return "Success";
+}
+
+bool Requirements::take_class(std::string name){
+    for(auto c: courses){
+        if(c.name == name){
+            bool prereqs_completed = true;
+            for(auto pr: c.prereq_ptr){
+                if(!(pr->completed)){
+                    prereqs_completed = false;
+                    return false;
+                }
+            }
+            if(prereqs_completed){
+                c.completed = true;
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void Requirements::make_graph(){

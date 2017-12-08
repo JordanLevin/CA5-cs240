@@ -15,14 +15,14 @@ class Requirements {
         };
         class Course{
             public:
-                bool completed;
-                std::string name;
-                char req;
-                std::vector<std::string> prereqs;
-                std::vector<Course*> prereq_ptr;
+            bool completed;
+            std::string name;
+            char req;
+            std::vector<std::string> prereqs;
+            std::vector<Course*> prereq_ptr;
 
-                Course() = default;
-                ~Course() = default;
+            Course() = default;
+            ~Course() = default;
         };
         int total;
         std::vector<std::pair<char, int> > credits;
@@ -30,9 +30,9 @@ class Requirements {
         std::vector<Choice> choices;
 
         void make_graph();
-
-        bool verify(CourseOfferings offerings, 
-               Schedule sched);
+        bool take_class(std::string name);
+        std::string verify(const CourseOfferings& offerings, 
+               const Schedule& sched);
 
 
 };

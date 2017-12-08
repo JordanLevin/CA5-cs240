@@ -4,9 +4,15 @@
 #include <string>
 #include <vector>
 class Schedule {
-  public:
-    std::vector<std::pair<std::string, std::vector<std::string> > > semesters;  
-    void sort_semesters();
+    public:
+        class Semester {
+            public:
+            char s;
+            std::string year; //add code to convert to int later
+            std::vector<std::string> classes;
+        };
+        std::vector<Semester> semesters;  
+        void sort_semesters();
 };
 
 #endif
