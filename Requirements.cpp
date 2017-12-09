@@ -84,11 +84,13 @@ std::string Requirements::verify(CourseOfferings& offerings,
 	
 
     //check that every mandatory/required class is taken
-  /*for(auto sem: schedule.semesters){
-		for(auto course: sem.classes){
-			string name = course;
-			if(
-	}*/
+    for(auto course: courses){
+        if((course.req == 'M' || course.req == 'R')
+                && !(course.completed)){
+            return std::string("Error: missing required/mandatory class: ") 
+                + course.name;
+        }
+    }
 
 
 
@@ -101,11 +103,11 @@ std::string Requirements::verify(CourseOfferings& offerings,
 
 bool Requirements::take_class(std::string name){
     bool class_found = false;
-    for(auto c: courses){
+    for(auto& c: courses){
         if(c.name == name){
             class_found = true;
             bool prereqs_completed = true;
-            for(auto pr: c.prereq_ptr){
+            for(auto& pr: c.prereq_ptr){
                 if(!(pr->completed)){
                     prereqs_completed = false;
                     return false;
@@ -119,8 +121,8 @@ bool Requirements::take_class(std::string name){
     }
     //add special case for a class not listed in prereqs file
     if(!class_found){
-        for(auto c: courses){
-            if(!c.completed){
+        for(auto& c: courses){
+            if(!c.completed && c.req == 'R'){
                 return false;
             }
         }
