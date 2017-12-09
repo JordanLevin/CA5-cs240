@@ -10,7 +10,6 @@ using namespace std;
 std::string Requirements::verify(CourseOfferings& offerings,
         const Schedule& schedule){
     //Checking if each course is offered
-    //TODO also check that the course offerings have it in the right semester
     for(auto sem: schedule.semesters){
         for(auto course: sem.classes){
             std::string name = course; 
@@ -61,8 +60,35 @@ std::string Requirements::verify(CourseOfferings& offerings,
 
 
     //check that the choices are being taken
+	for(auto choice: choices){
+		int num_of_classes = 0;
+		for(auto course: courses){
+			for(auto optional_course : choice.classes){
+				if(optional_course == course.name && course.completed){
+					num_of_classes++;
+				
+				}
+			}
+		}	
+
+		
+		if(num_of_classes != choice.amount)
+			cout<<"Error: Haven't taken: ";
+			for(auto optional_course_again : choice.classes)
+				cout<< optional_course_again << " ";
+			cout<<endl;
+			return std::string("Schedule will not work until you choose ") + std::to_string(choice.amount) + std::string(" of these.");
+	}
+	
+	
 
     //check that every mandatory/required class is taken
+  /*for(auto sem: schedule.semesters){
+		for(auto course: sem.classes){
+			string name = course;
+			if(
+	}*/
+
 
 
 
