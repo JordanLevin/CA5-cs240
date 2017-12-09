@@ -18,7 +18,6 @@ Schedule read_schedule(std::string path){
     std::ifstream read(path);
     while (std::getline(read, line)){
         Schedule::Semester s;
-        std::getline(read, line);
         std::istringstream in(line);
         in >> word;
         s.s = word[0];
@@ -44,7 +43,6 @@ CourseOfferings read_offerings(std::string path){
     while(std::getline(read, line)){
         CourseOfferings::Offering course;
 
-        std::getline(read, line);
         std::istringstream in(line);
 
         in >> word;
@@ -112,7 +110,7 @@ Requirements read_req(std::string path){
 int main(int argc, char *argv[]){
     auto req = read_req("./samples/req.txt"); 
     auto off = read_offerings("./samples/courses.txt"); 
-    auto sched = read_schedule("./samples/schedule.txt");
+    auto sched = read_schedule("./samples/schedule2.txt");
 
     std::cout << req.verify(off, sched) << std::endl;
     //for (unsigned int i =0; i<req.courses.size(); i++){
@@ -124,6 +122,6 @@ int main(int argc, char *argv[]){
     //for (unsigned int i =0; i<sched.semesters.size()-1; i++){
         //std::cout << sched.semesters[i].year << std::endl;
     //}
-    //sched.sort_semesters();
+    sched.sort_semesters();
     return 0;
 }
