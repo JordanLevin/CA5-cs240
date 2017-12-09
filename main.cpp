@@ -29,6 +29,7 @@ Schedule read_schedule(std::string path){
         ret.semesters.push_back(s);
         //courses.clear();
     }
+
     return ret;
 }
 
@@ -108,20 +109,20 @@ Requirements read_req(std::string path){
 }
 
 int main(int argc, char *argv[]){
-    auto req = read_req("./samples/req.txt"); 
-    auto off = read_offerings("./samples/courses.txt"); 
-    auto sched = read_schedule("./samples/schedule2.txt");
+    auto req = read_req(argv[1]); 
+    auto off = read_offerings(argv[2]); 
+    auto sched = read_schedule(argv[3]);
 
-    std::cout << req.verify(off, sched) << std::endl;
     //for (unsigned int i =0; i<req.courses.size(); i++){
         //std::cout << req.courses[i].name << std::endl;
     //}
     //for (unsigned int i =0; i<req.credits.size(); i++){
         //std::cout << req.credits[i].first << " " << req.credits[i].second << std::endl;
     //}
-    //for (unsigned int i =0; i<sched.semesters.size()-1; i++){
-        //std::cout << sched.semesters[i].year << std::endl;
+    //for (auto i: sched.semesters){
+        //std::cout << i.year << std::endl;
     //}
     sched.sort_semesters();
+    std::cout << req.verify(off, sched) << std::endl;
     return 0;
 }

@@ -16,7 +16,7 @@ std::string Requirements::verify(CourseOfferings& offerings,
             if (offerings.look_up.count(name)<=0){
                 return std::string("Error: course not found: ") + name;
             } else if (offerings.look_up[name].semester != 'E'){
-                cout << "this is sem.s: " << sem.s << endl;
+                //cout << "this is sem.s: " << sem.s << endl;
                 if (offerings.look_up[name].semester != sem.s){
                    return std::string("Error: course " + name + " is not offered in " + sem.s);
                } 
@@ -98,10 +98,11 @@ std::string Requirements::verify(CourseOfferings& offerings,
     return "Success";
 }
 
-//TODO add special case for a class not listed in prereqs file
 bool Requirements::take_class(std::string name){
+    bool class_found = false;
     for(auto c: courses){
         if(c.name == name){
+            class_found = true;
             bool prereqs_completed = true;
             for(auto pr: c.prereq_ptr){
                 if(!(pr->completed)){
@@ -114,6 +115,15 @@ bool Requirements::take_class(std::string name){
                 return true;
             }
         }
+    }
+    //add special case for a class not listed in prereqs file
+    if(!class_found){
+        for(auto c: courses){
+            if(!c.completed){
+                return false;
+            }
+        }
+        return true;
     }
     return false;
 }

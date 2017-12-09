@@ -26,7 +26,7 @@ void Schedule::sort_semesters(){
     semesters.erase(semesters.begin()+min);
   }
   semesters = sorted;
-  for (unsigned int i = 0; i < semesters.size(); i++){
-    cout << "sorted: " << sorted[i].s << " " << sorted[i].year << endl;
-  }
+  //for (unsigned int i = 0; i < semesters.size(); i++){
+    //cout << "sorted: " << sorted[i].s << " " << sorted[i].year << endl;
+  //}
 }
