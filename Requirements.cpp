@@ -62,23 +62,24 @@ std::string Requirements::verify(CourseOfferings& offerings,
     //check that the choices are being taken
 	for(auto choice: choices){
 		int num_of_classes = 0;
-		for(auto course: courses){
-			for(auto optional_course : choice.classes){
-				if(optional_course == course.name && course.completed){
-					num_of_classes++;
-				
-				}
-			}
-		}	
-
+        for(auto semester: schedule.semesters){
+            for(auto course: semester.classes){
+                if(std::find(choice.classes.begin(), choice.classes.end(),
+                    course) != choice.classes.end()){
+                    num_of_classes++;
+                }
+            }
+        }
 		
-		if(num_of_classes != choice.amount)
-			cout<<"Error: Haven't taken: ";
+		if(num_of_classes != choice.amount){
+			cout<<"Error: Haven't taken required amount of: ";
 			for(auto optional_course_again : choice.classes)
 				cout<< optional_course_again << " ";
 			cout<<endl;
 			return std::string("Schedule will not work until you choose ") + std::to_string(choice.amount) + std::string(" of these.");
-	}
+
+	    }
+    }
 	
 	
 
