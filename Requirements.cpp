@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include <iostream>
 
 using namespace std;
 
@@ -15,6 +16,11 @@ std::string Requirements::verify(CourseOfferings& offerings,
             std::string name = course; 
             if (offerings.look_up.count(name)<=0){
                 return std::string("Error: course not found: ") + name;
+            } else if (offerings.look_up[name].semester != 'E'){
+                cout << "this is sem.s: " << sem.s << endl;
+                if (offerings.look_up[name].semester != sem.s){
+                   return std::string("Error: course " + name + " is not offered in " + sem.s);
+               } 
             }
         }
     }
