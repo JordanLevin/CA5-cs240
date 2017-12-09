@@ -16,7 +16,7 @@ Schedule read_schedule(std::string path){
     std::string s;
 
     std::ifstream read(path);
-    while (read.good()){
+    while (std::getline(read, line)){
         Schedule::Semester s;
         std::getline(read, line);
         std::istringstream in(line);
@@ -41,7 +41,7 @@ CourseOfferings read_offerings(std::string path){
     char c;
 
     std::ifstream read(path);
-    while(read.good()){
+    while(std::getline(read, line)){
         CourseOfferings::Offering course;
 
         std::getline(read, line);
@@ -71,8 +71,7 @@ Requirements read_req(std::string path){
     char c;
 
     std::ifstream read(path);
-    while(read.good()){
-        std::getline(read, line);
+    while(std::getline(read, line)){
         std::istringstream in(line);
         in >> word;
         if(word == "TOTAL"){
