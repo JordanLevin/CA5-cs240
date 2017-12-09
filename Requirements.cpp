@@ -82,7 +82,6 @@ std::string Requirements::verify(CourseOfferings& offerings,
     }
 	
 	
-
     //check that every mandatory/required class is taken
     for(auto course: courses){
         if((course.req == 'M' || course.req == 'R')
@@ -91,9 +90,6 @@ std::string Requirements::verify(CourseOfferings& offerings,
                 + course.name;
         }
     }
-
-
-
 
 
     //If we find a reason for the schedule to fail we return false earlier

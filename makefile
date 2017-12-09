@@ -1,3 +1,5 @@
+#Team RealCS: Alex Orellana, Santos Acosta, Jordan Levin
+
 FLAGS = -g -Wall -std=c++14
 
 all: main Requirements Schedule
